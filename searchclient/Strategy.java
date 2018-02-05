@@ -143,34 +143,33 @@ public abstract class Strategy {
 		private Heuristic heuristic;
 		private PriorityQueue<Node> frontier;
 		private HashSet<Node> frontierSet;
-
-		//Comparator Node
-		public Comparator<Node> nodeComparator = new Comparator<Node>() {
-
-			@Override
-			public int compare(Node n1, Node n2) {
-				return (int) (n1.g() - n2.g());
-			}
-		};
+		private Comparator<Node> nodeComparator;
 
 		public StrategyBestFirst(Heuristic h) {
 			super();
 			this.heuristic = h;
 
-			frontier = new PriorityQueue<Node>(7, nodeComparator);
+			nodeComparator = new Comparator<Node>() {
+
+				@Override
+				public int compare(Node n1, Node n2) {
+					return (int) (this.h.f(n1) - this.h.f(n2));
+				}
+			};
+
+			frontier = new PriorityQueue<Node>(100, nodeComparator);
 			frontierSet = new HashSet<Node>();
 		}
 
 		@Override
 		public Node getAndRemoveLeaf() {
-			return null;
-			// Node n = frontier.poll();
-			// return n;
+			Node n = frontier.poll();
+			return n;
 		}
 
 		@Override
 		public void addToFrontier(Node n) {
-			// frontier.("5", n);
+			frontier.add(n);
 		}
 
 		@Override
