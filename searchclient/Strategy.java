@@ -1,8 +1,8 @@
 package searchclient;
 
 import java.util.*;
-import java.util.HashSet;
 
+import java.util.Comparator;
 import searchclient.Memory;
 import searchclient.NotImplementedException;
 
@@ -28,7 +28,9 @@ public abstract class Strategy {
 	}
 
 	public String searchStatus() {
-		return String.format("#Explored: %,6d, #Frontier: %,6d, #Generated: %,6d, Time: %3.2f s \t%s", this.countExplored(), this.countFrontier(), this.countExplored()+this.countFrontier(), this.timeSpent(), Memory.stringRep());
+		return String.format("#Explored: %,6d, #Frontier: %,6d, #Generated: %,6d, Time: %3.2f s \t%s",
+				this.countExplored(), this.countFrontier(), this.countExplored() + this.countFrontier(),
+				this.timeSpent(), Memory.stringRep());
 	}
 
 	public float timeSpent() {
@@ -139,36 +141,51 @@ public abstract class Strategy {
 	// Ex 3: Best-first Search uses a priority queue (Java contains no implementation of a Heap data structure)
 	public static class StrategyBestFirst extends Strategy {
 		private Heuristic heuristic;
+		private PriorityQueue<Node> frontier;
+		private HashSet<Node> frontierSet;
+
+		//Comparator Node
+		public Comparator<Node> nodeComparator = new Comparator<Node>() {
+
+			@Override
+			public int compare(Node n1, Node n2) {
+				return (int) (n1.g() - n2.g());
+			}
+		};
 
 		public StrategyBestFirst(Heuristic h) {
 			super();
 			this.heuristic = h;
-			throw new NotImplementedException();
+
+			frontier = new PriorityQueue<Node>(7, nodeComparator);
+			frontierSet = new HashSet<Node>();
 		}
 
 		@Override
 		public Node getAndRemoveLeaf() {
-			throw new NotImplementedException();
+			return null;
+			// Node n = frontier.poll();
+			// return n;
 		}
 
 		@Override
 		public void addToFrontier(Node n) {
-			throw new NotImplementedException();
+			// frontier.("5", n);
 		}
 
 		@Override
 		public int countFrontier() {
-			throw new NotImplementedException();
+			return frontier.size();
 		}
 
 		@Override
 		public boolean frontierIsEmpty() {
-			throw new NotImplementedException();
+			return frontier.isEmpty();
 		}
 
 		@Override
 		public boolean inFrontier(Node n) {
-			throw new NotImplementedException();
+			return frontierSet.contains(n);
 		}
 
 		@Override

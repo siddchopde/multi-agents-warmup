@@ -7,10 +7,12 @@ import searchclient.NotImplementedException;
 public abstract class Heuristic implements Comparator<Node> {
 	public Heuristic(Node initialState) {
 		// Here's a chance to pre-process the static parts of the level.
+		System.out.println("IntialState: " + initialState);
 	}
 
 	public int h(Node n) {
-		throw new NotImplementedException();
+		// Set a random number as heuristic
+		return 6;
 	}
 
 	public abstract int f(Node n);
