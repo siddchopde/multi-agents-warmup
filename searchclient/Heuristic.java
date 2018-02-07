@@ -1,6 +1,7 @@
 package searchclient;
 
 import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.*;
 
 import static java.lang.Math.abs;
@@ -14,26 +15,27 @@ public abstract class Heuristic implements Comparator<Node> {
 	public Heuristic(Node initialState) {
 		// Here's a chance to pre-process the static parts of the level.
 
-		Map<String, String> goals = new HashMap<String, String>();
-		Map<String, String> boxes = new HashMap<String, String>();
-		
+		ArrayList<Goal> goals = new ArrayList<Goal>();
+		ArrayList<Box> boxes = new ArrayList<Box>();
 		
 		for (int row = 1; row < MAX_ROW - 1; row++) {
 			for (int col = 1; col < MAX_COL - 1; col++) {
 				char g = initialState.goals[row][col];
+				char b = initialState.boxes[row][col];
+				
 				if ('a' <= g && g <= 'z') {
-					goals.put(String.valueOf(initialState.goals[row][col]), new Integer(row).toString() + "#" + new Integer(col).toString());
+					goals.add(new Goal(initialState.goals[row][col], row, col));
 				}
-				if ('A' <= g && g <= 'Z') {
-					boxes.put(String.valueOf(initialState.goals[row][col]), new Integer(row).toString() + "#" + new Integer(col).toString());
+				if ('A' <= b && b <= 'Z') {
+					boxes.add(new Box(initialState.goals[row][col], row, col));
 				}
 			}
 		}
 	}
 
 	public int h(Node n) {
-		int dx = abs(n.agentRow - goals.get("a").split());
-		int dy = abs(n.agentCol - goals.get("a")).split;
+		int dx = abs(n.agentRow - 17);
+		int dy = abs(n.agentCol - 5);
 		return 1 * (dx + dy);
 	}
 
@@ -92,6 +94,30 @@ public abstract class Heuristic implements Comparator<Node> {
 		@Override
 		public String toString() {
 			return "Greedy evaluation";
+		}
+	}
+
+	public class Goal {
+		char goal;
+		int row;
+		int col;
+
+		public Goal(char goal, int row, int col) {
+			this.goal = goal;
+			this.row = row;
+			this.col = col;
+		}
+	}
+
+	public class Box {
+		char box;
+		int row;
+		int col;
+
+		public Box(char box, int row, int col) {
+			this.box = box;
+			this.row = row;
+			this.col = col;
 		}
 	}
 }
