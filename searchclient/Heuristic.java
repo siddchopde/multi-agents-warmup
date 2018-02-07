@@ -13,9 +13,11 @@ import searchclient.NotImplementedException;
 
 public abstract class Heuristic implements Comparator<Node> {
 	public Heuristic(Node initialState) {
-		// Here's a chance to pre-process the static parts of the level.
 
+		// Consists of all goals on a given level
 		ArrayList<Goal> goals = new ArrayList<Goal>();
+
+		// Consists of all boxes on a given level
 		ArrayList<Box> boxes = new ArrayList<Box>();
 		
 		for (int row = 1; row < MAX_ROW - 1; row++) {
@@ -34,8 +36,21 @@ public abstract class Heuristic implements Comparator<Node> {
 	}
 
 	public int h(Node n) {
-		int dx = abs(n.agentRow - 17);
-		int dy = abs(n.agentCol - 5);
+		
+		// GoalAbs which should be calcualted for every boxes and goals on the level
+		int goalAbs_x = 0;
+		int goalAbs_y = 0;
+		
+		for (int i = 0; i < goals.size(); i++) {
+			
+		}
+
+		for (int i = 0; i < boxes.size(); i++) {
+
+		}
+
+		int dx = abs(n.agentRow - goalAbs_x);
+		int dy = abs(n.agentCol - goalAbs_y);
 		return 1 * (dx + dy);
 	}
 
