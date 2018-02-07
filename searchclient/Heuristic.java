@@ -1,17 +1,40 @@
 package searchclient;
 
 import java.util.Comparator;
+import java.util.Map;
+
+import static searchclient.Node.MAX_ROW;
+import static searchclient.Node.MAX_COL;
 
 import searchclient.NotImplementedException;
 
 public abstract class Heuristic implements Comparator<Node> {
 	public Heuristic(Node initialState) {
 		// Here's a chance to pre-process the static parts of the level.
-		System.out.println("IntialState: " + initialState);
+		
+		Map<String, String> goals = new HashMap<String, String>();
+
+		for (int row = 1; row < MAX_ROW - 1; row++) {
+			for (int col = 1; col < MAX_COL - 1; col++) {
+				char g = initialState.goals[row][col];
+				if ('a' <= g && g <= 'z') {
+					goals.put(new Integer(row).toString(), new Integer(col).toString());
+				}
+			}
+		}
+
+		System.out.println("length of goals" + goals.size());
 	}
 
 	public int h(Node n) {
-		return 0;
+
+		// if (numberGoals == 1) {
+		// 	dx = abs(n.agentCol - n.goals[0][1]);
+		// 	dy = abs(node.y - goal.y);
+		// 	return D * (dx + dy);
+		// } else {
+			return 0;
+		// }
 	}
 
 	public abstract int f(Node n);
