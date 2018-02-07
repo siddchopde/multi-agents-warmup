@@ -12,18 +12,18 @@ public abstract class Heuristic implements Comparator<Node> {
 	public Heuristic(Node initialState) {
 		// Here's a chance to pre-process the static parts of the level.
 		
-		Map<String, String> goals = new HashMap<String, String>();
+		// Map<String, String> goals = new HashMap<String, String>();
 
-		for (int row = 1; row < MAX_ROW - 1; row++) {
-			for (int col = 1; col < MAX_COL - 1; col++) {
-				char g = initialState.goals[row][col];
-				if ('a' <= g && g <= 'z') {
-					goals.put(new Integer(row).toString(), new Integer(col).toString());
-				}
-			}
-		}
+		// for (int row = 1; row < MAX_ROW - 1; row++) {
+		// 	for (int col = 1; col < MAX_COL - 1; col++) {
+		// 		char g = initialState.goals[row][col];
+		// 		if ('a' <= g && g <= 'z') {
+		// 			goals.put(new Integer(row).toString(), new Integer(col).toString());
+		// 		}
+		// 	}
+		// }
 
-		System.out.println("length of goals" + goals.size());
+		// System.out.println("length of goals" + goals.size());
 	}
 
 	public int h(Node n) {
