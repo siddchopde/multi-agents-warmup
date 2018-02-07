@@ -11,8 +11,7 @@ public abstract class Heuristic implements Comparator<Node> {
 	}
 
 	public int h(Node n) {
-		// Set a random number as heuristic
-		return 6;
+		return 0;
 	}
 
 	public abstract int f(Node n);

@@ -153,7 +153,7 @@ public abstract class Strategy {
 
 				@Override
 				public int compare(Node n1, Node n2) {
-					return (int) (this.h.f(n1) - this.h.f(n2));
+					return (int) (heuristic.f(n1) - heuristic.f(n2));
 				}
 			};
 
